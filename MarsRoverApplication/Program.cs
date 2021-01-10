@@ -30,7 +30,7 @@ namespace MarsRoverApplication
             Console.WriteLine("Enter Plateau Points :");
             var plateauInput = Console.ReadLine();
             var plateau = plateauService.GetPlateauCoordinate(plateauInput);
-            List<Rover> rovers = new List<Rover>();
+            List<IRover> rovers = new List<IRover>();
 
             for (int i = 0; i < 2; i++)
             {
@@ -41,6 +41,11 @@ namespace MarsRoverApplication
 
                 Console.WriteLine("Enter Rover Command Set :");
                 var roverCommands = Console.ReadLine();
+                
+                if (!roverService.CompareRoversPosition(rovers, roverPosition, (eDirection)direction))
+                    throw new Exception("Invalid rover position input.");
+
+                
                 rovers.Add(new Rover(roverPosition, roverCommands, (eDirection)direction));
 
             }
