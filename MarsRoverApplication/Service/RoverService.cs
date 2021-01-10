@@ -1,4 +1,4 @@
-﻿using MarsRoverApplication.Model;
+using MarsRoverApplication.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +23,20 @@ namespace MarsRoverApplication.Service
 
 
             }
+        }
+        
+        public bool CompareRoversPosition(List<IRover> rovers, Position position, eDirection direction)
+        {
+            foreach (var rover in rovers)
+            {
+                if (rover.RoverPosition.XCoordinate == position.XCoordinate && rover.RoverPosition.YCoordinate == position.YCoordinate
+                    && rover.RoverDirection == direction)
+                    return false;
+                else
+                    return true;
+            }
+            return true;
+
         }
 
     }
