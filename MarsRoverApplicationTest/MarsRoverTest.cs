@@ -1,6 +1,7 @@
 using MarsRoverApplication.Model;
 using MarsRoverApplication.Service;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace MarsRoverApplicationTest
@@ -115,6 +116,34 @@ namespace MarsRoverApplicationTest
             PositionService positionService = new PositionService();
             Position position = positionService.GetPositionCoordinate("1 2 N");
             Assert.NotNull(position);
+
+        }
+        
+        [Fact]
+        public void CheckCompareRoversPosition()
+        {
+            RoverService roverService = new RoverService();
+
+            Position firstPosition = new Position()
+            {
+                XCoordinate = 1,
+                YCoordinate = 2,
+            };
+
+            string command = "MMAMMRMRAM";
+            Rover rover = new Rover(firstPosition, command, eDirection.N);
+
+            List<IRover> rovers = new List<IRover>();
+            rovers.Add(rover);
+
+            Position secondPosition = new Position()
+            {
+                XCoordinate = 1,
+                YCoordinate = 2
+            };
+
+            Assert.False(roverService.CompareRoversPosition(rovers, secondPosition, eDirection.N));
+
 
         }
 
